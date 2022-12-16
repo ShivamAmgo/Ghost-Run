@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManagerGhost : MonoBehaviour
 {
     public static GameManagerGhost Instance{ get; private set; }
-    public  delegate void TransformGhost();
+    public  delegate void TransformGhost(bool TransformStatus);
 
     public static event TransformGhost TransformGhostPlayer;
     private int SkullPoints = 0;
@@ -22,7 +22,7 @@ public class GameManagerGhost : MonoBehaviour
             Instance = this; 
         } 
     }
-
+    
     public void AddSkullPoint()
     {
         
@@ -30,7 +30,7 @@ public class GameManagerGhost : MonoBehaviour
         if (SkullPoints>=SkullsToTransform)
         {
             SkullPoints = 0;
-            TransformGhostPlayer?.Invoke();
+            TransformGhostPlayer?.Invoke(true);
         }
     }
 }

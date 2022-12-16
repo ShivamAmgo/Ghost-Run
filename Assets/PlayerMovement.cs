@@ -41,6 +41,14 @@ public class PlayerMovement : MonoBehaviour
     public delegate void PlayerInfoRaise(Transform Player);
 
     public static event PlayerInfoRaise DeliverPlayerInfo;
+
+    private void OnEnable()
+    {
+        VictimMovement.OnFlee+=OnVictimFlee;
+    }
+
+    
+
     private void Start()
     {
         //PlayerAnim = GetComponent<Animator>();
@@ -90,6 +98,16 @@ public class PlayerMovement : MonoBehaviour
         //ClampPlayerPos();
     }
 
+    public void EnableMovement()
+    {
+        
+        isMoving = true;
+        
+    }
+    private void OnVictimFlee()
+    {
+        //EnableMovement();
+    }
     private void FixedUpdate()
     {
         if (!isMoving)return;
@@ -171,5 +189,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
+    private void OnDisable()
+    {
+        VictimMovement.OnFlee -= OnVictimFlee;
+    }
 }

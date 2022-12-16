@@ -18,19 +18,19 @@ public class CameraFollow : MonoBehaviour
    [SerializeField] private float RotateSpeed = 2;
    [SerializeField] private float RotateLimit = 60;
    [SerializeField] private Vector3 WinCamOffset;
+   [SerializeField] private Transform FocusPoint;
+   [SerializeField] private float CameraRotationFromFOcusPoint = 60;
+   [SerializeField] private Transform FocusPointBack;
    private Vector3 cameraposAfterCalculation = Vector3.zero;
-/*
+
+   public delegate void CameraFocusGhost();
+
+   public static event CameraFocusGhost OnCameraFocusGhost;
    private void OnEnable()
    {
-      StuntController.OnCinematicCameraPlay += CheckCameraMode;
-      EdgeFall.OnEdgeDetected += StopFollowing;
-      StuntController.OnWinningDance += WinCam;
-      EnemyBoss.OnFlyingPunch += FollowEnemyBoss;
-      PlayerMovement.DeliverPlayerInfo += ReceivePlayer;
-      //PlayerFall.
-      
+      VictimMovement.OnFlee += RotateCameraToOriginalPos;
    }
-*/
+
    private void ReceivePlayer(Transform player)
    {
       Target = player;
@@ -46,7 +46,7 @@ public class CameraFollow : MonoBehaviour
    private void Start()
    {
       cameraposAfterCalculation = offset;
-      
+      FocusOnVictim();
    }
 
    private void Update()
@@ -89,15 +89,21 @@ public class CameraFollow : MonoBehaviour
       ChildCamera.DOLocalMove(Vector3.zero, 1f);
       ChildCamera.DOLocalRotate(Vector3.zero, 1f);
    }
-/*
-   void StopFollowing(EdgeFall edgeFall)
+
+   void FocusOnVictim()
    {
-      if (edgeFall.PlayerWillDie)
+      ChildCamera.localRotation = FocusPoint.localRotation;
+      ChildCamera.DOLocalMove(FocusPoint.localPosition, 1f);
+      
+      DOVirtual.DelayedCall( 3,() =>
       {
-         follow = false;
-         CinematicCamera = true;
-      }
-   }*/
+         //ChildCamera.DOLocalRotate
+            //(transform.eulerAngles + new Vector3(0, CameraRotationFromFOcusPoint, 0), 0.15f);
+            OnCameraFocusGhost?.Invoke();
+            ChildCamera.DOLocalRotate(FocusPointBack.localEulerAngles, 0.25f);
+            ChildCamera.DOLocalMove(FocusPointBack.localPosition, 0.2f);
+      });
+   }
 
    void FollowEnemyBoss(Transform FollowTarget)
    {
@@ -109,13 +115,9 @@ public class CameraFollow : MonoBehaviour
       }
       Target = FollowTarget;
    }
-/*
+
    private void OnDisable()
    {
-      StuntController.OnCinematicCameraPlay -= CheckCameraMode;
-      EdgeFall.OnEdgeDetected -= StopFollowing;
-      StuntController.OnWinningDance -= WinCam;
-      EnemyBoss.OnFlyingPunch -= FollowEnemyBoss;
-      PlayerMovement.DeliverPlayerInfo -= ReceivePlayer;
-   }*/
+      VictimMovement.OnFlee -= RotateCameraToOriginalPos;
+   }
 }

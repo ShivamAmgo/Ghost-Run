@@ -10,13 +10,13 @@ public class Transformation : MonoBehaviour
     [SerializeField] private PlayerMovement m_PlayerMovement;
     [SerializeField]float SpeedIncreaseFactor=1;
     private int ActiveGhostIndex = 0;
-
+    
     private void OnEnable()
     {
         GameManagerGhost.TransformGhostPlayer += TransformGhost;
     }
 
-    void TransformGhost()
+    void TransformGhost(bool Transformstatus)
     {
         if (AllGhosts.Count-1==ActiveGhostIndex)
         {
