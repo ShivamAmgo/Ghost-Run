@@ -8,11 +8,19 @@ public class Ghost : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] private Animator m_Animator;
     [SerializeField] private PlayerMovement m_PlayerMovement;
-
+    [SerializeField] private float AttackDistane = 2;
+    [SerializeField] private VictimMovement m_VictimMovement;
+    private bool VictimChased = false;
+    
     private void OnEnable()
     {
         CameraFollow.OnCameraFocusGhost += CrawlOut;
+        MimicHandAttack.OnVictimCatched += VictimCatched;
+        EndLine.OnFinish += OnFinishLine;
     }
+
+   
+
 
     private void CrawlOut()
     {
@@ -38,8 +46,44 @@ public class Ghost : MonoBehaviour
         
     }
 
+    private void Update()
+    {
+        if (Vector3.Distance(m_VictimMovement.transform.position,transform.position)<=AttackDistane && !VictimChased)
+        {
+            VictimChased = true;
+            AttackVictim();
+        }
+    }
+
+    void AttackVictim()
+    {
+        m_PlayerMovement.Speed = m_VictimMovement.Speed;
+        m_Animator.SetTrigger("Attack");
+    }
+
+    public void VictimCatched(Transform Victim)
+    {
+        m_Animator.SetTrigger("Idle");
+    }
+    private void OnFinishLine()
+    {
+        m_PlayerMovement.Speed = 0;
+        m_Animator.SetTrigger("SoulSuck");
+    }
+
+    public void Throw()
+    {
+        VIctimThrownMovement VTM = GetComponentInChildren<VIctimThrownMovement>();
+        if (VTM==null)
+        {
+            return;;
+        }
+        VTM.Thrown();
+    }
     private void OnDisable()
     {
         CameraFollow.OnCameraFocusGhost -= CrawlOut;
+        MimicHandAttack.OnVictimCatched -= VictimCatched;
+        EndLine.OnFinish -= OnFinishLine;
     }
 }

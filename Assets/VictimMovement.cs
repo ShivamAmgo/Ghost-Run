@@ -7,10 +7,12 @@ using UnityEngine;
 
 public class VictimMovement : MonoBehaviour
 {
-  [SerializeField] private float Speed = 10;
+  [SerializeField] public float Speed = 10;
   [SerializeField] private float SpeedIncreaseFactor=1.25f;
   [SerializeField] private float JumpDuration = 0.5f;
   [SerializeField]private Vector3 Offset;
+  [SerializeField] private Animator m_Animator;
+  [SerializeField] private List<Rigidbody> RigRigidbodies;
   
   private bool IsMoving = false;
 
@@ -28,6 +30,7 @@ private void OnEnable()
   {
     GameManagerGhost.TransformGhostPlayer += IncreaseSpeed;
     Obstacle.OnJumpTriggered += Jump;
+    MimicHandAttack.OnVictimCatched += Caught;
   }
 
   private void FixedUpdate()
@@ -41,6 +44,31 @@ private void OnEnable()
   {
     Speed+=SpeedIncreaseFactor;
   }
+  private void Caught(Transform victim)
+  {
+    
+      RagdollActive(true);
+      Speed = 0;
+      Debug.Log("Equillibrium");
+  }
+
+  void RagdollActive(bool activestatus)
+  {
+    m_Animator.enabled = !activestatus;
+    foreach (Rigidbody rb in RigRigidbodies)
+    {
+      /*
+      if (rb.name=="Head")
+      {
+        continue;
+      }
+      */
+      rb.isKinematic = !activestatus;
+      //rb.AddForce(Vector3.forward*5,ForceMode.Impulse);
+    }
+  }
+
+  
   public void Flee()
   {
     Debug.Log("FLEE");
@@ -56,8 +84,8 @@ private void OnEnable()
     IsMoving = false;
     Vector3 jumpZ = transform.position + new Vector3(0, 0, 4);
     Vector3 jumpY = transform.position + new Vector3(0, JumpPower, 0);
-    float duration = (Vector3.Distance(jumpY, transform.position)/9.8f);
-                   Debug.Log("Jump"+duration);
+    float duration = (Vector3.Distance(jumpY, transform.position)/9.8f); 
+    //Debug.Log("Jump"+duration);
                    
     transform.DOJump(jumpZ,JumpPower,1,duration*2).
       SetEase(Ease.Linear).OnComplete(() =>
@@ -78,6 +106,7 @@ private void OnEnable()
       */
 
   }
+  /*
   void AlignToGround(Vector3 OffsetFromground,bool Tween)
   {
       //float angle;
@@ -121,16 +150,18 @@ private void OnEnable()
             return;
             ;
         }
-            /*
-        m_PlayerRotation.enabled = true;
-        yield return new WaitForSeconds(0.15f);
-        m_PlayerRotation.enabled = false;
-        transform.position = new Vector3(transform.position.x, GroundOffset.y, transform.position.z);
-        */
+            
+        //m_PlayerRotation.enabled = true;
+        //yield return new WaitForSeconds(0.15f);
+       // m_PlayerRotation.enabled = false;
+        //transform.position = new Vector3(transform.position.x, GroundOffset.y, transform.position.z);
+        
     }
+*/
   private void OnDisable()
   {
     GameManagerGhost.TransformGhostPlayer -= IncreaseSpeed;
     Obstacle.OnJumpTriggered -= Jump;
+    MimicHandAttack.OnVictimCatched -= Caught;
   }
 }

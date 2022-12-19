@@ -11,6 +11,8 @@ public class GameManagerGhost : MonoBehaviour
     private int SkullPoints = 0;
 
     [SerializeField]int SkullsToTransform;
+     float TransformCount = 0;
+    [SerializeField] private float TotalGhosts = 4;
     private void Awake()
     {
         if (Instance != null && Instance != this) 
@@ -20,7 +22,9 @@ public class GameManagerGhost : MonoBehaviour
         else 
         { 
             Instance = this; 
-        } 
+        }
+
+        Physics.gravity = new Vector3(0, -18f, 0);
     }
     
     public void AddSkullPoint()
@@ -30,7 +34,15 @@ public class GameManagerGhost : MonoBehaviour
         if (SkullPoints>=SkullsToTransform)
         {
             SkullPoints = 0;
+            TransformCount++;
+            
+            if (TransformCount>=TotalGhosts)
+            {
+                Debug.Log("Limit Reached");
+                return;
+            }
             TransformGhostPlayer?.Invoke(true);
+            
         }
     }
 }

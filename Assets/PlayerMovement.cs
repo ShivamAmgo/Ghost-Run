@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float RotataeBackSpeed = 10;
     [SerializeField] private Rigidbody PlayerRb;
     [SerializeField] private Transform GroundCheck;
-    
+    //[SerializeField] private Transform Victim;
     [SerializeField]private Animator PlayerAnim;
     public bool isMoving = false;
     private Touch Xmove;
@@ -45,9 +45,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         VictimMovement.OnFlee+=OnVictimFlee;
+        
     }
 
-    
+   
+
 
     private void Start()
     {
@@ -82,6 +84,8 @@ public class PlayerMovement : MonoBehaviour
                 
             }
         }
+
+        
     }
 
   
@@ -116,10 +120,12 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log("movex");
             Move(posX);
         }
+        /*
         else if (PlayerState==State.ElevatedRun)
         {
             ElevatedRun();
         }
+        */
        
         RotatePlayer();
         //AlignPlayer();
@@ -163,6 +169,8 @@ public class PlayerMovement : MonoBehaviour
     
         }
     }
+    
+    /*
     public void RagdollActive(bool activestatus)
     {
         if (activestatus)
@@ -188,6 +196,8 @@ public class PlayerMovement : MonoBehaviour
             //rb.AddForce(Vector3.forward*5,ForceMode.Impulse);
         }
     }
+    */
+   
 
     private void OnDisable()
     {
