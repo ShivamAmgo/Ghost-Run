@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &685837192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 685837193}
+  m_Layer: 7
+  m_Name: CameraposAtsoulsuckpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &685837193
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685837192}
+  m_LocalRotation: {x: 0.10099375, y: -0.89415956, z: 0.15830375, w: -0.4064713}
+  m_LocalPosition: {x: -4.0698166, y: 1.4624009, z: 14.726853}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4053132891586076811}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 13.789, y: 129.367, z: -21.616}
 --- !u!1 &4590618957661536791
 GameObject:
   m_ObjectHideFlags: 0
@@ -5353,6 +5384,7 @@ MonoBehaviour:
   m_PlayerMovement: {fileID: 4590618957661536789}
   AttackDistane: 2
   m_VictimMovement: {fileID: 0}
+  CameraposAtSoulSuckPoint: {fileID: 0}
 --- !u!4 &4053132891016567390 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4031179134610401876, guid: dc532bd833ca1ab43961c51a628e317d,
@@ -5810,7 +5842,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a0b1f76622cf64cba1df5b21ef8d17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VictimCaughtPosAlign: {x: 2.032, y: -0.132, z: 0.03}
+  VictimCaughtPosAlign: {x: 1.404, y: -0.927, z: 0.746}
+  VictimCaughtRotAlign: {x: 39.415997, y: 297.24048, z: 41.43942}
 --- !u!1 &3707674496266730033 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 530598021035482927, guid: 02f396a281da72a4a91de72adeb0f07b,
@@ -5833,6 +5866,7 @@ MonoBehaviour:
   m_PlayerMovement: {fileID: 4590618957661536789}
   AttackDistane: 1.85
   m_VictimMovement: {fileID: 0}
+  CameraposAtSoulSuckPoint: {fileID: 685837193}
 --- !u!4 &4053132891586076811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 871095484530820501, guid: 02f396a281da72a4a91de72adeb0f07b,
@@ -8075,6 +8109,7 @@ MonoBehaviour:
   m_PlayerMovement: {fileID: 4590618957661536789}
   AttackDistane: 2
   m_VictimMovement: {fileID: 0}
+  CameraposAtSoulSuckPoint: {fileID: 0}
 --- !u!4 &4053132891634027864 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 49e22f28092b1ad4d911d483b6b2d0d4,
@@ -8548,6 +8583,7 @@ MonoBehaviour:
   m_PlayerMovement: {fileID: 0}
   AttackDistane: 2
   m_VictimMovement: {fileID: 0}
+  CameraposAtSoulSuckPoint: {fileID: 0}
 --- !u!4 &4053132891227705911 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3451658e94b61f346b1e9dae91f681ce,
@@ -9011,6 +9047,7 @@ MonoBehaviour:
   m_PlayerMovement: {fileID: 4590618957661536789}
   AttackDistane: 2
   m_VictimMovement: {fileID: 0}
+  CameraposAtSoulSuckPoint: {fileID: 0}
 --- !u!4 &4046080467042742086 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5386812862245575351, guid: 65e1ba35416368b478071ae1d64548a0,

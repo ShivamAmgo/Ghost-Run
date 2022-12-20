@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using DG.Tweening.Core;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class VIctimThrownMovement : MonoBehaviour
 {
@@ -12,15 +13,29 @@ public class VIctimThrownMovement : MonoBehaviour
     [SerializeField] private float thrownDuration = 2;
     [SerializeField] private Rigidbody FixedJointHead;
     [SerializeField] private float SlowMoDuration = 1;
-    //[SerializeField] private float slowMotionTimeScale = 0.5f;
 
+    [SerializeField] private VictimMovement m_VictimMovement;
+
+    [SerializeField] private Quaternion ThrownRot;
+
+    [SerializeField] private Transform FreeFallPartRotate;
+    //[SerializeField] private float slowMotionTimeScale = 0.5f;
+    private Transform GhostPlayer;
 
     private int FallCount = 0;
 
+   
     private void OnEnable()
     {
         EndLine.OnBodyFallpositionsDeleiver += StoreBodyFallpositions;
+        PlayerMovement.DeliverPlayerInfo += GetIncomingPlayer;
     }
+
+    private void GetIncomingPlayer(Transform player)
+    {
+        GhostPlayer = player;
+    }
+
     private void Start()
     {
         
@@ -45,6 +60,12 @@ public class VIctimThrownMovement : MonoBehaviour
     {
         if (FallCount==BodyHitGroundPoints.Count)
         {
+            FixedJointHead.isKinematic = false;
+            DOVirtual.DelayedCall(1, () =>
+            {
+                CameraFollow.Instance.PlayCinematicMode(false);
+                GameManagerGhost.Instance.SetCameraToFollow(GhostPlayer);
+            });
             return;
         }
         else
@@ -60,12 +81,28 @@ public class VIctimThrownMovement : MonoBehaviour
         transform.DOJump(POS.position, ThrownPower, 1, thrownDuration).SetEase(Ease.Linear).OnComplete(() =>
         {
             FallCount++;
-            SlowMotionEffect();
+            if (FallCount<BodyHitGroundPoints.Count)
+            {
+                RotateVictimFreeFall();
+                SlowMotionEffect();
+            }
+            
             CheckBodyFallPositions();
         });
     }
+
+    void RotateVictimFreeFall()
+    {
+        transform.DORotate(new Vector3(transform.eulerAngles.x+Random.Range(45,360),0,0), 0.5f, RotateMode.Fast);
+    }
     void SlowMotionEffect()
     {
+        Time.timeScale = 0.25f;
+        DOVirtual.DelayedCall(1, () =>
+        {
+            Time.timeScale = 1;
+        });
+        /*
         float c = Time.timeScale;
         DOTween.To(() => c, x => c = x, 0.2f, SlowMoDuration).OnUpdate(() =>
         {
@@ -77,41 +114,26 @@ public class VIctimThrownMovement : MonoBehaviour
                 Time.timeScale = c;
             });
         });
-        
+        */
+
+
     }
     public void Thrown()
     {
         transform.parent = null;
+        GameManagerGhost.Instance.SetCameraToFollow(transform);
+        CameraFollow.Instance.PlayCinematicMode(true);
         if (FixedJointHead!=null)
         {
-            FixedJointHead.isKinematic = false;
+            //FixedJointHead.isKinematic = false;
         }
         ThrowBody(BodyHitGroundPoints[0],ThrownPower,thrownDuration);
-    
+        transform.rotation = ThrownRot;
     }
-    /*
-    public void StartSlowMotion()
-    {
-
-        
-        Time.timeScale = slowMotionTimeScale;
-        Time.fixedDeltaTime = _startFixedDeltaTime * slowMotionTimeScale;
-        StopSlowMotionAfterDelay();
-       
-    }
-
-    
-
-    public void StopSlowMotion()
-    {
-        Time.timeScale = _startTimeScale;
-        Time.fixedDeltaTime = _startFixedDeltaTime;
-        
-
-    }
-    */
+   
     private void OnDisable()
     {
         EndLine.OnBodyFallpositionsDeleiver -= StoreBodyFallpositions;
+        PlayerMovement.DeliverPlayerInfo -= GetIncomingPlayer;
     }
 }

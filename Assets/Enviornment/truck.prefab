@@ -3204,7 +3204,7 @@ MonoBehaviour:
   - {fileID: 1390812458231895117}
   - {fileID: 2365149915974546248}
   throwBackForce: 20
-  upForce: 5
+  upForce: 7
   PartsToDisable:
   - {fileID: 6690760934335152499}
   - {fileID: 676689944570018872}

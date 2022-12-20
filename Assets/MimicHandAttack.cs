@@ -10,6 +10,7 @@ public class MimicHandAttack : MonoBehaviour
     public static event VictimCathed OnVictimCatched;
     private bool used = false;
     [SerializeField] private Vector3 VictimCaughtPosAlign;
+    [SerializeField] private Vector3 VictimCaughtRotAlign;
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag=="Victim" && !used)
@@ -24,5 +25,6 @@ public class MimicHandAttack : MonoBehaviour
     {
         Victim.parent = transform;
         Victim.localPosition = VictimCaughtPosAlign;
+        Victim.localEulerAngles = VictimCaughtRotAlign;
     }
 }

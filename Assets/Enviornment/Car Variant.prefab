@@ -489,5 +489,5 @@ MonoBehaviour:
   - {fileID: 590361582}
   - {fileID: 1539817152}
   throwBackForce: 15
-  upForce: 3
+  upForce: 8
   PartsToDisable: []

@@ -22,13 +22,27 @@ public class CameraFollow : MonoBehaviour
    [SerializeField] private float CameraRotationFromFOcusPoint = 60;
    [SerializeField] private Transform FocusPointBack;
    private Vector3 cameraposAfterCalculation = Vector3.zero;
-
+   public static CameraFollow Instance{ get; private set; }
    public delegate void CameraFocusGhost();
 
    public static event CameraFocusGhost OnCameraFocusGhost;
+
+   private void Awake()
+   {
+      if (Instance != null && Instance != this) 
+      { 
+         Destroy(this); 
+      } 
+      else 
+      { 
+         Instance = this; 
+      }
+   }
+
    private void OnEnable()
    {
       VictimMovement.OnFlee += RotateCameraToOriginalPos;
+      GameManagerGhost.OnSettingCameraToFollow += FollowEnemyBoss;
    }
 
    private void ReceivePlayer(Transform player)
@@ -46,7 +60,7 @@ public class CameraFollow : MonoBehaviour
    private void Start()
    {
       cameraposAfterCalculation = offset;
-      FocusOnVictim();
+      FocusOnVictim(FocusPoint,FocusPointBack);
    }
 
    private void Update()
@@ -71,10 +85,12 @@ public class CameraFollow : MonoBehaviour
 
    }
 
-   void CheckCameraMode(bool Status)
+   public void PlayCinematicMode(bool Status)
    {
       if (Status)
       {
+         ChildCamera.localRotation=Quaternion.identity;
+         ChildCamera.localPosition=Vector3.zero;
          CinematicCamera = true;
       }
       else if (!Status)
@@ -90,14 +106,17 @@ public class CameraFollow : MonoBehaviour
       ChildCamera.DOLocalRotate(Vector3.zero, 1f);
    }
 
-   void FocusOnVictim()
+   public void FocusOnVictim(Transform FocusPoint,Transform FocusPointBack)
    {
       ChildCamera.localRotation = FocusPoint.localRotation;
       ChildCamera.DOLocalMove(FocusPoint.localPosition, 1f);
-      
+      if (FocusPointBack==null)
+      {
+         return;  
+      }
       DOVirtual.DelayedCall( 3,() =>
       {
-         //ChildCamera.DOLocalRotate
+            //ChildCamera.DOLocalRotate
             //(transform.eulerAngles + new Vector3(0, CameraRotationFromFOcusPoint, 0), 0.15f);
             OnCameraFocusGhost?.Invoke();
             ChildCamera.DOLocalRotate(FocusPointBack.localEulerAngles, 0.25f);
@@ -119,5 +138,6 @@ public class CameraFollow : MonoBehaviour
    private void OnDisable()
    {
       VictimMovement.OnFlee -= RotateCameraToOriginalPos;
+      GameManagerGhost.OnSettingCameraToFollow -= FollowEnemyBoss;
    }
 }

@@ -12,6 +12,7 @@ public class Obstacle : MonoBehaviour
    [SerializeField] private float throwBackForce = 5;
    [SerializeField] private float upForce = 3;
    [SerializeField] private GameObject[] PartsToDisable;
+   [SerializeField] private bool ObstacleForPlayer = true;
    public delegate void JumpTriggered(float JumpHeightParam);
 
    public static event JumpTriggered OnJumpTriggered;
@@ -21,11 +22,21 @@ public class Obstacle : MonoBehaviour
       {
           
           Used = true;
-          OnJumpTriggered?.Invoke(JumpHeight);
+          if (ObstacleForPlayer)
+          {
+              OnJumpTriggered?.Invoke(JumpHeight);
+          }
+          else
+          {
+              Shattered = true;
+              Shatter();
+          }
+          
       }
 
-      if (other.tag=="Player" && !Shattered)
+      else if (other.tag=="Player" && !Shattered)
       {
+          
           Shattered = true;
           Shatter();
       }
@@ -34,9 +45,10 @@ public class Obstacle : MonoBehaviour
    void Shatter()
    {
        int count = 0;
-       var direction = -transform.forward;
+       
        foreach (var rb in rigidbodies)
        {
+           var direction = rb.transform.forward;
            float randomness = 1;
            rb.isKinematic = false;
            if (count%2==0)
@@ -46,7 +58,7 @@ public class Obstacle : MonoBehaviour
            rb.AddForce(direction * (throwBackForce)*randomness + Vector3.up*upForce, ForceMode.Impulse);
            count++;
        }
-
+       StartCoroutine(Destroy());
        if ( PartsToDisable.Length<1)
        {
            return;
@@ -56,7 +68,7 @@ public class Obstacle : MonoBehaviour
            obj.SetActive(false);
        }
 
-       StartCoroutine(Destroy());
+       
    }
 
    IEnumerator Destroy()

@@ -10,6 +10,8 @@ public class Ghost : MonoBehaviour
     [SerializeField] private PlayerMovement m_PlayerMovement;
     [SerializeField] private float AttackDistane = 2;
     [SerializeField] private VictimMovement m_VictimMovement;
+
+    [SerializeField] Transform CameraposAtSoulSuckPoint;
     private bool VictimChased = false;
     
     private void OnEnable()
@@ -48,7 +50,7 @@ public class Ghost : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(m_VictimMovement.transform.position,transform.position)<=AttackDistane && !VictimChased)
+        if (m_VictimMovement.transform.position.z-transform.position.z<=AttackDistane && !VictimChased)
         {
             VictimChased = true;
             AttackVictim();
@@ -58,7 +60,12 @@ public class Ghost : MonoBehaviour
     void AttackVictim()
     {
         m_PlayerMovement.Speed = m_VictimMovement.Speed;
-        m_Animator.SetTrigger("Attack");
+        //Debug.Log("name "+transform.name);
+        if (GetComponentInChildren<MimicHandAttack>()!=null)
+        {
+            m_Animator.SetTrigger("Attack");
+        }
+        
     }
 
     public void VictimCatched(Transform Victim)
@@ -68,6 +75,7 @@ public class Ghost : MonoBehaviour
     private void OnFinishLine()
     {
         m_PlayerMovement.Speed = 0;
+        CameraFollow.Instance.FocusOnVictim(CameraposAtSoulSuckPoint,null);
         m_Animator.SetTrigger("SoulSuck");
     }
 
@@ -76,9 +84,10 @@ public class Ghost : MonoBehaviour
         VIctimThrownMovement VTM = GetComponentInChildren<VIctimThrownMovement>();
         if (VTM==null)
         {
-            return;;
+            return;
         }
         VTM.Thrown();
+        m_PlayerMovement.enabled = false;
     }
     private void OnDisable()
     {

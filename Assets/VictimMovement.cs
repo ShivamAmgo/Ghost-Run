@@ -64,6 +64,19 @@ private void OnEnable()
       }
       */
       rb.isKinematic = !activestatus;
+      //rb.useGravity = !activestatus;
+      //rb.AddForce(Vector3.forward*5,ForceMode.Impulse);
+    }
+    
+  }
+
+  public void SetGravity(bool GravityStatus)
+  {
+    foreach (Rigidbody rb in RigRigidbodies)
+    {
+      
+      
+      rb.useGravity = GravityStatus;
       //rb.AddForce(Vector3.forward*5,ForceMode.Impulse);
     }
   }
