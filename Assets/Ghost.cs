@@ -10,7 +10,7 @@ public class Ghost : MonoBehaviour
     [SerializeField] private PlayerMovement m_PlayerMovement;
     [SerializeField] private float AttackDistane = 2;
     [SerializeField] private VictimMovement m_VictimMovement;
-
+    [SerializeField]ParticleSystem[] SoulSucksFX;
     [SerializeField] Transform CameraposAtSoulSuckPoint;
     private bool VictimChased = false;
     
@@ -77,8 +77,15 @@ public class Ghost : MonoBehaviour
         m_PlayerMovement.Speed = 0;
         CameraFollow.Instance.FocusOnVictim(CameraposAtSoulSuckPoint,null);
         m_Animator.SetTrigger("SoulSuck");
+        
     }
-
+    public void PlaySoulEffects()
+    {
+        foreach(ParticleSystem ps in SoulSucksFX)
+        {
+            ps.Play();
+        }
+    }
     public void Throw()
     {
         VIctimThrownMovement VTM = GetComponentInChildren<VIctimThrownMovement>();

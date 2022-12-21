@@ -14,6 +14,8 @@ public class GameManagerGhost : MonoBehaviour
     public static event TransformGhost TransformGhostPlayer;
     private int SkullPoints = 0;
 
+	
+
     [SerializeField]int SkullsToTransform;
      float TransformCount = 0;
     [SerializeField] private float TotalGhosts = 4;

@@ -93,7 +93,7 @@ public class VIctimThrownMovement : MonoBehaviour
 
     void RotateVictimFreeFall()
     {
-        transform.DORotate(new Vector3(transform.eulerAngles.x+Random.Range(45,360),0,0), 0.5f, RotateMode.Fast);
+        transform.DORotate(new Vector3(transform.eulerAngles.x+Random.Range(45,360),0,0), (thrownDuration-0.1f), RotateMode.Fast);
     }
     void SlowMotionEffect()
     {

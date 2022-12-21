@@ -38,6 +38,7 @@ private void OnEnable()
     if (!IsMoving)return;
     
     transform.position += (transform.forward*Time.deltaTime*Speed);
+    
   }
 
   void IncreaseSpeed(bool status)
