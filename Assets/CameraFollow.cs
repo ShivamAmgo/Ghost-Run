@@ -19,7 +19,7 @@ public class CameraFollow : MonoBehaviour
    [SerializeField] private float RotateLimit = 60;
    [SerializeField] private Vector3 WinCamOffset;
    [SerializeField] private Transform FocusPoint;
-   [SerializeField] private float CameraRotationFromFOcusPoint = 60;
+   //[SerializeField] private float CameraRotationFromFOcusPoint = 60;
    [SerializeField] private Transform FocusPointBack;
    private Vector3 cameraposAfterCalculation = Vector3.zero;
    public static CameraFollow Instance{ get; private set; }

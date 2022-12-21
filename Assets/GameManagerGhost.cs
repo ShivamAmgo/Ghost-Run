@@ -19,6 +19,7 @@ public class GameManagerGhost : MonoBehaviour
     [SerializeField]int SkullsToTransform;
      float TransformCount = 0;
     [SerializeField] private float TotalGhosts = 4;
+    [SerializeField]GameObject[] WinAndLosePanel;
     private void Awake()
     {
         if (Instance != null && Instance != this) 
@@ -67,7 +68,18 @@ public class GameManagerGhost : MonoBehaviour
             
         }
     }
-
+    public void SetWin(bool WinStatus)
+    {
+        if(WinStatus)
+        {
+            WinAndLosePanel[0].SetActive(true);
+        }
+        else
+        {
+            WinAndLosePanel[1].SetActive(true);
+        }
+        
+    }
     public void SetCameraToFollow(Transform Target)
     {
         if (Target==null)

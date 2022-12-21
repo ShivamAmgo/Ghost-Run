@@ -12,7 +12,7 @@ public class VIctimThrownMovement : MonoBehaviour
     [SerializeField] private float ThrownPower = 5;
     [SerializeField] private float thrownDuration = 2;
     [SerializeField] private Rigidbody FixedJointHead;
-    [SerializeField] private float SlowMoDuration = 1;
+    //[SerializeField] private float SlowMoDuration = 1;
 
     [SerializeField] private VictimMovement m_VictimMovement;
 
@@ -61,10 +61,11 @@ public class VIctimThrownMovement : MonoBehaviour
         if (FallCount==BodyHitGroundPoints.Count)
         {
             FixedJointHead.isKinematic = false;
-            DOVirtual.DelayedCall(1, () =>
+            DOVirtual.DelayedCall(4, () =>
             {
                 CameraFollow.Instance.PlayCinematicMode(false);
                 GameManagerGhost.Instance.SetCameraToFollow(GhostPlayer);
+                GameManagerGhost.Instance.SetWin(true);
             });
             return;
         }
@@ -121,6 +122,7 @@ public class VIctimThrownMovement : MonoBehaviour
     public void Thrown()
     {
         transform.parent = null;
+        m_VictimMovement.DisableColliders(false);
         GameManagerGhost.Instance.SetCameraToFollow(transform);
         CameraFollow.Instance.PlayCinematicMode(true);
         if (FixedJointHead!=null)

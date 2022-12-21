@@ -14,7 +14,8 @@ public class Obstacle : MonoBehaviour
    [SerializeField] private GameObject[] PartsToDisable;
    [SerializeField] private bool ObstacleForPlayer = true;
    public delegate void JumpTriggered(float JumpHeightParam);
-
+    public delegate void ObstacleHit();
+    public static event ObstacleHit OnObstacleHit;
    public static event JumpTriggered OnJumpTriggered;
    private void OnTriggerEnter(Collider other)
    {
@@ -36,7 +37,7 @@ public class Obstacle : MonoBehaviour
 
       else if (other.tag=="Player" && !Shattered)
       {
-          
+          OnObstacleHit?.Invoke();
           Shattered = true;
           Shatter();
       }

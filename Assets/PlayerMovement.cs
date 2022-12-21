@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening; 
 public enum State
 {
     NormalRun,
@@ -16,9 +16,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private List<Rigidbody> RigRigidbodies;
     [SerializeField] public float Speed=3;
     [SerializeField] private float StrafeSpeed = 3;
-    [SerializeField] private float RotatePlayerLimitInDegrees = 10;
+    //[SerializeField] private float RotatePlayerLimitInDegrees = 10;
     [SerializeField] private float RotateSpeed = 10;
-    [SerializeField] private float RotataeBackSpeed = 10;
+    //[SerializeField] private float RotataeBackSpeed = 10;
     [SerializeField] private Rigidbody PlayerRb;
     [SerializeField] private Transform GroundCheck;
     //[SerializeField] private Transform Victim;
@@ -45,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         VictimMovement.OnFlee+=OnVictimFlee;
+        Obstacle.OnObstacleHit+=ObstacleHit;
         
     }
 
@@ -95,6 +96,13 @@ public class PlayerMovement : MonoBehaviour
         //transform.rotation=Quaternion.Euler(0,posX*RotateSpeed*Time.deltaTime,0);
         transform.rotation=Quaternion.AngleAxis(posX*RotateSpeed*Time.deltaTime,Vector3.up);
        
+    }
+    void  ObstacleHit()
+    {
+        --Speed;
+        DOVirtual.DelayedCall(1,()=>{
+            Speed++;
+        });
     }
 
     private void LateUpdate()
@@ -202,5 +210,6 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable()
     {
         VictimMovement.OnFlee -= OnVictimFlee;
+        Obstacle.OnObstacleHit-=ObstacleHit;
     }
 }

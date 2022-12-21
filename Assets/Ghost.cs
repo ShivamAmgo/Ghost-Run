@@ -59,7 +59,7 @@ public class Ghost : MonoBehaviour
 
     void AttackVictim()
     {
-        m_PlayerMovement.Speed = m_VictimMovement.Speed;
+        m_PlayerMovement.Speed = m_VictimMovement.MaxSpeed;
         //Debug.Log("name "+transform.name);
         if (GetComponentInChildren<MimicHandAttack>()!=null)
         {
@@ -74,8 +74,14 @@ public class Ghost : MonoBehaviour
     }
     private void OnFinishLine()
     {
-        m_PlayerMovement.Speed = 0;
+        m_PlayerMovement.enabled = false;
         CameraFollow.Instance.FocusOnVictim(CameraposAtSoulSuckPoint,null);
+        if(GetComponentInChildren<VIctimThrownMovement>()==null)
+        {
+            //Lose Panel
+            GameManagerGhost.Instance.SetWin(false);
+            return;
+        }
         m_Animator.SetTrigger("SoulSuck");
         
     }

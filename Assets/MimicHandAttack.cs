@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class MimicHandAttack : MonoBehaviour
 {
     public delegate void VictimCathed(Transform Victim);
@@ -23,6 +23,7 @@ public class MimicHandAttack : MonoBehaviour
 
     void CatchVictim(Transform Victim)
     {
+        DOTween.KillAll();
         Victim.parent = transform;
         Victim.localPosition = VictimCaughtPosAlign;
         Victim.localEulerAngles = VictimCaughtRotAlign;

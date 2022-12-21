@@ -9,11 +9,12 @@ public class VictimMovement : MonoBehaviour
 {
   [SerializeField] public float Speed = 10;
   [SerializeField] private float SpeedIncreaseFactor=1.25f;
-  [SerializeField] private float JumpDuration = 0.5f;
+  //[SerializeField] private float JumpDuration = 0.5f;
   [SerializeField]private Vector3 Offset;
   [SerializeField] private Animator m_Animator;
   [SerializeField] private List<Rigidbody> RigRigidbodies;
-  
+  [SerializeField]List<Collider> RagdollColliders;
+  public float MaxSpeed=0;
   private bool IsMoving = false;
 
   public delegate void Fleeing();
@@ -44,15 +45,24 @@ private void OnEnable()
   void IncreaseSpeed(bool status)
   {
     Speed+=SpeedIncreaseFactor;
+    if(MaxSpeed<=Speed)
+    MaxSpeed=Speed;
   }
   private void Caught(Transform victim)
   {
     
       RagdollActive(true);
+      DisableColliders(true);
       Speed = 0;
       Debug.Log("Equillibrium");
   }
-
+public void DisableColliders(bool ActiveStatus)
+{
+  foreach (Collider col in RagdollColliders)
+  {
+    col.enabled=!ActiveStatus;
+  }
+}
   void RagdollActive(bool activestatus)
   {
     m_Animator.enabled = !activestatus;
@@ -96,7 +106,7 @@ private void OnEnable()
   {
     
     IsMoving = false;
-    Vector3 jumpZ = transform.position + new Vector3(0, 0, 4);
+    Vector3 jumpZ = transform.position + new Vector3(0, 0, 6);
     Vector3 jumpY = transform.position + new Vector3(0, JumpPower, 0);
     float duration = (Vector3.Distance(jumpY, transform.position)/9.8f); 
     //Debug.Log("Jump"+duration);

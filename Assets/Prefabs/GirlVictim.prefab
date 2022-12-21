@@ -1949,8 +1949,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 11
-  SpeedIncreaseFactor: 1.15
-  JumpDuration: 1
+  SpeedIncreaseFactor: 1.25
   Offset: {x: 0, y: 0, z: 0}
   m_Animator: {fileID: 7569261070675445889}
   RigRigidbodies:
@@ -1965,6 +1964,19 @@ MonoBehaviour:
   - {fileID: 156199382}
   - {fileID: 1355569289}
   - {fileID: 1039922844}
+  RagdollColliders:
+  - {fileID: 927844982}
+  - {fileID: 1757677463}
+  - {fileID: 1585616576}
+  - {fileID: 2006042705}
+  - {fileID: 881746779}
+  - {fileID: 707271893}
+  - {fileID: 1463371736}
+  - {fileID: 1265783506}
+  - {fileID: 156199383}
+  - {fileID: 1355569291}
+  - {fileID: 1039922845}
+  MaxSpeed: 0
 --- !u!114 &968677397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1990,9 +2002,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThrownPower: 5
-  thrownDuration: 1
+  thrownDuration: 2
   FixedJointHead: {fileID: 731047988}
-  SlowMoDuration: 0.2
   m_VictimMovement: {fileID: 968677396}
   ThrownRot: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
   FreeFallPartRotate: {fileID: 4605852025109893883}
