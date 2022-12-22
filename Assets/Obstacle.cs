@@ -13,6 +13,8 @@ public class Obstacle : MonoBehaviour
    [SerializeField] private float upForce = 3;
    [SerializeField] private GameObject[] PartsToDisable;
    [SerializeField] private bool ObstacleForPlayer = true;
+   [SerializeField] private bool Randomness = true;
+   [SerializeField] private Vector3 direction = new Vector3(0, 0, 1);
    public delegate void JumpTriggered(float JumpHeightParam);
     public delegate void ObstacleHit();
     public static event ObstacleHit OnObstacleHit;
@@ -46,17 +48,27 @@ public class Obstacle : MonoBehaviour
    void Shatter()
    {
        int count = 0;
-       
+       //Debug.Log("colliede "+transform.name);
        foreach (var rb in rigidbodies)
        {
-           var direction = rb.transform.forward;
+           //var direction = rb.transform.forward;
            float randomness = 1;
            rb.isKinematic = false;
            if (count%2==0)
            {
                randomness = -1;
            }
-           rb.AddForce(direction * (throwBackForce)*randomness + Vector3.up*upForce, ForceMode.Impulse);
+
+           if (Randomness)
+           {
+               rb.AddForce(direction * (throwBackForce)*randomness + Vector3.up*upForce, ForceMode.Impulse);
+           }
+           else
+           {
+               rb.AddForce(direction * (throwBackForce) + Vector3.up*upForce, ForceMode.Impulse);
+           }
+           
+           rb.AddTorque(6,3,10);
            count++;
        }
        StartCoroutine(Destroy());

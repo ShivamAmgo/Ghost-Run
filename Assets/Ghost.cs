@@ -21,6 +21,7 @@ public class Ghost : MonoBehaviour
         CameraFollow.OnCameraFocusGhost += CrawlOut;
         MimicHandAttack.OnVictimCatched += VictimCatched;
         EndLine.OnFinish += OnFinishLine;
+        
     }
 
    
