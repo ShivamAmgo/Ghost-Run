@@ -14,10 +14,13 @@ public class EndLine : MonoBehaviour
    public static event Finished OnFinish;
    
    public static event DeliverVictimFallpositions OnBodyFallpositionsDeleiver;
+    [SerializeField] Transform FogBox;
+    [SerializeField] Vector3 FOgBoxPos;
 
    private void Start()
    {
       OnBodyFallpositionsDeleiver?.Invoke(BodyFallPos);
+        FogBox.localPosition = FOgBoxPos;
    }
 
    private void OnTriggerEnter(Collider other)

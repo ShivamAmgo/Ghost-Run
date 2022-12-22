@@ -5159,7 +5159,7 @@ PrefabInstance:
     - target: {fileID: 4375933940747940078, guid: dc532bd833ca1ab43961c51a628e317d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4473613283687802058, guid: dc532bd833ca1ab43961c51a628e317d,
         type: 3}
@@ -5264,7 +5264,7 @@ PrefabInstance:
     - target: {fileID: 6994526470212595758, guid: dc532bd833ca1ab43961c51a628e317d,
         type: 3}
       propertyPath: m_CullingMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6994526470212595758, guid: dc532bd833ca1ab43961c51a628e317d,
         type: 3}
@@ -5352,6 +5352,7 @@ MonoBehaviour:
   m_VictimMovement: {fileID: 0}
   SoulSucksFX: []
   CameraposAtSoulSuckPoint: {fileID: 0}
+  Attacktrigger: {fileID: 0}
 --- !u!4 &4053132891016567390 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4031179134610401876, guid: dc532bd833ca1ab43961c51a628e317d,
@@ -5516,11 +5517,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2715566403135673696, guid: 02f396a281da72a4a91de72adeb0f07b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8041258536844749518, guid: 02f396a281da72a4a91de72adeb0f07b,
         type: 3}
       propertyPath: AttackDistane
-      value: 4
+      value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8041258536844749518, guid: 02f396a281da72a4a91de72adeb0f07b,
+        type: 3}
+      propertyPath: Attacktrigger
+      value: 
+      objectReference: {fileID: 1262977224747495550}
     - target: {fileID: 8041258536844749518, guid: 02f396a281da72a4a91de72adeb0f07b,
         type: 3}
       propertyPath: m_PlayerMovement
@@ -5528,6 +5539,12 @@ PrefabInstance:
       objectReference: {fileID: 4590618957661536789}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02f396a281da72a4a91de72adeb0f07b, type: 3}
+--- !u!135 &1262977224747495550 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 2715566403135673696, guid: 02f396a281da72a4a91de72adeb0f07b,
+    type: 3}
+  m_PrefabInstance: {fileID: 3758639103291729182}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4053132891586076811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 871095484530820501, guid: 02f396a281da72a4a91de72adeb0f07b,
@@ -7778,6 +7795,7 @@ MonoBehaviour:
   m_VictimMovement: {fileID: 0}
   SoulSucksFX: []
   CameraposAtSoulSuckPoint: {fileID: 0}
+  Attacktrigger: {fileID: 0}
 --- !u!4 &4053132891634027864 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 49e22f28092b1ad4d911d483b6b2d0d4,
@@ -8253,6 +8271,7 @@ MonoBehaviour:
   m_VictimMovement: {fileID: 0}
   SoulSucksFX: []
   CameraposAtSoulSuckPoint: {fileID: 0}
+  Attacktrigger: {fileID: 0}
 --- !u!4 &4053132891227705911 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3451658e94b61f346b1e9dae91f681ce,
@@ -8718,6 +8737,7 @@ MonoBehaviour:
   m_VictimMovement: {fileID: 0}
   SoulSucksFX: []
   CameraposAtSoulSuckPoint: {fileID: 0}
+  Attacktrigger: {fileID: 0}
 --- !u!4 &4046080467042742086 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5386812862245575351, guid: 65e1ba35416368b478071ae1d64548a0,

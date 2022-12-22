@@ -22,10 +22,16 @@ public class Transformation : MonoBehaviour
         {
             return;
         }
+
+       
         TransformationFx.Emit(30);
         AllGhosts[ActiveGhostIndex].gameObject.SetActive(false);
         AllGhosts[++ActiveGhostIndex].gameObject.SetActive(true);
         m_PlayerMovement.Speed += SpeedIncreaseFactor;
+        if (AllGhosts.Count-1==ActiveGhostIndex)
+        {
+            AllGhosts[ActiveGhostIndex].ActiveAttackTrigger();
+        }
     }
 
     private void OnDisable()

@@ -12,6 +12,8 @@ public class Ghost : MonoBehaviour
     [SerializeField] private VictimMovement m_VictimMovement;
     [SerializeField]ParticleSystem[] SoulSucksFX;
     [SerializeField] Transform CameraposAtSoulSuckPoint;
+    [SerializeField] private SphereCollider Attacktrigger;
+    
     private bool VictimChased = false;
     
     private void OnEnable()
@@ -68,6 +70,10 @@ public class Ghost : MonoBehaviour
         
     }
 
+    public void ActiveAttackTrigger()
+    {
+        Attacktrigger.enabled = true;
+    }
     public void VictimCatched(Transform Victim)
     {
         m_Animator.SetTrigger("Idle");
