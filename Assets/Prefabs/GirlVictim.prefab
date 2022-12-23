@@ -2002,7 +2002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThrownPower: 5
-  thrownDuration: 2
+  thrownDuration: 2.5
   FixedJointHead: {fileID: 731047988}
   m_VictimMovement: {fileID: 968677396}
   ThrownRot: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}

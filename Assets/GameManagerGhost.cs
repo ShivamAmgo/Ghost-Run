@@ -51,10 +51,11 @@ public class GameManagerGhost : MonoBehaviour
         }
     }
 
-    public void AddSkullPoint()
+    public void AddSkullPoint(int Points)
     {
         
-        SkullPoints++;
+        SkullPoints+=Points;
+        SkullPoints = Mathf.Clamp(SkullPoints, 0, 1000);
         if (SkullPoints>=SkullsToTransform)
         {
             SkullPoints = 0;
@@ -68,6 +69,8 @@ public class GameManagerGhost : MonoBehaviour
             TransformGhostPlayer?.Invoke(true);
             
         }
+
+        
     }
     public void SetWin(bool WinStatus)
     {

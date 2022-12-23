@@ -32,9 +32,16 @@ private void OnEnable()
     GameManagerGhost.TransformGhostPlayer += IncreaseSpeed;
     Obstacle.OnJumpTriggered += Jump;
     MimicHandAttack.OnVictimCatched += Caught;
+    Ghost.OnGhostChasing += Flee;
+    Mirror.OnMirrorBreak += OnMirrorBroken;
   }
 
-  private void FixedUpdate()
+private void OnMirrorBroken()
+{
+  m_Animator.SetTrigger("Shock");
+}
+
+private void FixedUpdate()
   {
     if (!IsMoving)return;
     
@@ -95,8 +102,9 @@ public void DisableColliders(bool ActiveStatus)
   
   public void Flee()
   {
-    Debug.Log("FLEE");
+    //Debug.Log("FLEE");
     transform.rotation = Quaternion.identity;
+    m_Animator.SetTrigger("Run");
     IsMoving = true;
     OnFlee?.Invoke();
     
@@ -187,5 +195,7 @@ public void DisableColliders(bool ActiveStatus)
     GameManagerGhost.TransformGhostPlayer -= IncreaseSpeed;
     Obstacle.OnJumpTriggered -= Jump;
     MimicHandAttack.OnVictimCatched -= Caught;
+    Ghost.OnGhostChasing -= Flee;
+    Mirror.OnMirrorBreak -= OnMirrorBroken;
   }
 }

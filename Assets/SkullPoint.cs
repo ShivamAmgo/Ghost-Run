@@ -8,17 +8,26 @@ public class SkullPoint : MonoBehaviour
     private bool Used = false;
     [SerializeField] private ParticleSystem DestroyFX;
     [SerializeField] private GameObject MeshSkull;
+    [SerializeField] private bool IsBible = false;
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag=="Player" && !Used)
         {
             Used = true;
-            GameManagerGhost.Instance.AddSkullPoint();
-            StartCoroutine(DestroySkull());
+            if (IsBible)
+            {
+                GameManagerGhost.Instance.AddSkullPoint(-1);
+            }
+            else
+            {
+                GameManagerGhost.Instance.AddSkullPoint(1);
+            }
+            
+            StartCoroutine(DestroyObj());
         }
     }
 
-    IEnumerator DestroySkull()
+    IEnumerator DestroyObj()
     {
         MeshSkull.SetActive(false);
         DestroyFX.Play();

@@ -13,6 +13,12 @@ public class Ghost : MonoBehaviour
     [SerializeField]ParticleSystem[] SoulSucksFX;
     [SerializeField] Transform CameraposAtSoulSuckPoint;
     [SerializeField] private SphereCollider Attacktrigger;
+    [SerializeField] private GameObject[] ghost;
+    [SerializeField] private SphereCollider[] MirrorDetectors;
+
+    public delegate void Chasing();
+
+    public static event Chasing OnGhostChasing;
     
     private bool VictimChased = false;
     
@@ -21,6 +27,8 @@ public class Ghost : MonoBehaviour
         CameraFollow.OnCameraFocusGhost += CrawlOut;
         MimicHandAttack.OnVictimCatched += VictimCatched;
         EndLine.OnFinish += OnFinishLine;
+        //m_Animator.enabled = true;
+       ActivateGhost(false);
         
     }
 
@@ -29,9 +37,20 @@ public class Ghost : MonoBehaviour
 
     private void CrawlOut()
     {
+        
         m_Animator.enabled = true;
+        m_Animator.SetTrigger("CrawlOut");
+        ActivateGhost(true);
+        DisableDetectors(false);
     }
 
+    void ActivateGhost(bool ActiveStatus)
+    {
+        foreach (var obj in ghost)
+        {
+            obj.SetActive(ActiveStatus);
+        }
+    }
     public void SetRootMotion(int status)
     {
         //return;
@@ -41,7 +60,9 @@ public class Ghost : MonoBehaviour
             m_Animator.SetTrigger("Run");
             transform.root.position = transform.position;
             transform.localPosition=Vector3.zero;
+            transform.localRotation=Quaternion.identity;
             m_PlayerMovement.isMoving = true;
+            OnGhostChasing?.Invoke();
             
         }
         else
@@ -51,6 +72,23 @@ public class Ghost : MonoBehaviour
         
     }
 
+    public void Transformed()
+    {
+        m_Animator.enabled = true;
+        m_Animator.applyRootMotion = false;
+        m_Animator.SetTrigger("Run");
+        ActivateGhost(true);
+        DisableDetectors(true);
+        
+    }
+
+    public void DisableDetectors(bool Status)
+    {
+        foreach (var VARIABLE in MirrorDetectors)
+        {
+            VARIABLE.enabled = !Status;
+        }
+    }
     private void Update()
     {
         if (m_VictimMovement.transform.position.z-transform.position.z<=AttackDistane && !VictimChased)
@@ -59,7 +97,7 @@ public class Ghost : MonoBehaviour
             AttackVictim();
         }
     }
-
+    
     void AttackVictim()
     {
         m_PlayerMovement.Speed = m_VictimMovement.MaxSpeed;
@@ -87,6 +125,8 @@ public class Ghost : MonoBehaviour
         {
             //Lose Panel
             GameManagerGhost.Instance.SetWin(false);
+            m_Animator.SetTrigger("Scream");
+            this.enabled = false;
             return;
         }
         m_Animator.SetTrigger("SoulSuck");

@@ -94,7 +94,7 @@ public class VIctimThrownMovement : MonoBehaviour
 
     void RotateVictimFreeFall()
     {
-        transform.DORotate(new Vector3(transform.eulerAngles.x+Random.Range(60,360),0,0), (thrownDuration-0.1f), RotateMode.Fast);
+        transform.DORotate(new Vector3(transform.eulerAngles.x+Random.Range(60,360),transform.eulerAngles.y+Random.Range(60,360),transform.eulerAngles.z+Random.Range(60,360)), (thrownDuration-0.1f), RotateMode.Fast);
     }
     void SlowMotionEffect()
     {
@@ -131,6 +131,7 @@ public class VIctimThrownMovement : MonoBehaviour
         }
         ThrowBody(BodyHitGroundPoints[0],ThrownPower,thrownDuration);
         transform.rotation = ThrownRot;
+        RotateVictimFreeFall();
     }
    
     private void OnDisable()

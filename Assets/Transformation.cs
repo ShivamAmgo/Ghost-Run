@@ -14,6 +14,7 @@ public class Transformation : MonoBehaviour
     private void OnEnable()
     {
         GameManagerGhost.TransformGhostPlayer += TransformGhost;
+        AllGhosts[0].gameObject.SetActive(true);
     }
 
     void TransformGhost(bool Transformstatus)
@@ -27,6 +28,7 @@ public class Transformation : MonoBehaviour
         TransformationFx.Emit(30);
         AllGhosts[ActiveGhostIndex].gameObject.SetActive(false);
         AllGhosts[++ActiveGhostIndex].gameObject.SetActive(true);
+        AllGhosts[ActiveGhostIndex].Transformed();
         m_PlayerMovement.Speed += SpeedIncreaseFactor;
         if (AllGhosts.Count-1==ActiveGhostIndex)
         {

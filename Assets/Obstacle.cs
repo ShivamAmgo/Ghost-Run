@@ -15,6 +15,7 @@ public class Obstacle : MonoBehaviour
    [SerializeField] private bool ObstacleForPlayer = true;
    [SerializeField] private bool Randomness = true;
    [SerializeField] private Vector3 direction = new Vector3(0, 0, 1);
+   [SerializeField] private Mirror _mirror;
    public delegate void JumpTriggered(float JumpHeightParam);
     public delegate void ObstacleHit();
     public static event ObstacleHit OnObstacleHit;
@@ -42,6 +43,10 @@ public class Obstacle : MonoBehaviour
           OnObstacleHit?.Invoke();
           Shattered = true;
           Shatter();
+          if (_mirror!=null)
+          {
+              _mirror.OnBreakMirror();
+          }
       }
    }
 
