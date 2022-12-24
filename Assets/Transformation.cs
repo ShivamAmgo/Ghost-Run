@@ -9,6 +9,7 @@ public class Transformation : MonoBehaviour
     [SerializeField] private ParticleSystem TransformationFx;
     [SerializeField] private PlayerMovement m_PlayerMovement;
     [SerializeField]float SpeedIncreaseFactor=1;
+    [SerializeField] private int ParticleCount = 50;
     private int ActiveGhostIndex = 0;
     
     private void OnEnable()
@@ -25,7 +26,7 @@ public class Transformation : MonoBehaviour
         }
 
        
-        TransformationFx.Emit(30);
+        TransformationFx.Emit(ParticleCount);
         AllGhosts[ActiveGhostIndex].gameObject.SetActive(false);
         AllGhosts[++ActiveGhostIndex].gameObject.SetActive(true);
         AllGhosts[ActiveGhostIndex].Transformed();

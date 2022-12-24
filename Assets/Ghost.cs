@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Ghost : MonoBehaviour
@@ -72,6 +73,13 @@ public class Ghost : MonoBehaviour
         
     }
 
+    public void EmergeOutFlyingFromWell()
+    {
+        transform.DOJump(transform.position + new Vector3(0, 0, 3), 3, 1,3).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            SetRootMotion(0);
+        });
+    }
     public void Transformed()
     {
         m_Animator.enabled = true;

@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoftFireBigRed
       objectReference: {fileID: 0}
+    - target: {fileID: 1210589541773082, guid: 395a551931a0b5c479c9a0eb8883174e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4782543229931610, guid: 395a551931a0b5c479c9a0eb8883174e, type: 3}
       propertyPath: m_RootOrder
       value: 3

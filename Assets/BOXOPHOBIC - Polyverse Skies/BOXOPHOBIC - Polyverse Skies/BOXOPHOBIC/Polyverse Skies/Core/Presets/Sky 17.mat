@@ -12,7 +12,6 @@ Material:
   m_ValidKeywords:
   - _BACKGROUNDMODE_COLORS
   - _ENABLECLOUDSROTATION_ON
-  - _ENABLEPATTERNOVERLAY_ON
   - _ENABLESTARSTWINKLING_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 0
@@ -201,7 +200,7 @@ Material:
     - _EnableDirectionLight: 0
     - _EnableMoon: 0
     - _EnablePattern: 1
-    - _EnablePatternOverlay: 1
+    - _EnablePatternOverlay: 0
     - _EnableSkyPatternOverlay: 1
     - _EnableStars: 0
     - _EnableStarsHeightMask: 0
@@ -243,7 +242,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _PatternCat: 1
-    - _PatternContrast: 0.69
+    - _PatternContrast: 0
     - _PatternOverlay: 1
     - _RoatationSpeed: 0.4
     - _Rotation: 0
@@ -305,12 +304,12 @@ Material:
     - _Color2: {r: 0.059472326, g: 0.25068596, b: 0.8088235, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Eq: {r: 1, g: 0.6769777, b: 0.330882, a: 0}
-    - _EquatorColor: {r: 0.13333334, g: 0.909804, b: 0.95294124, a: 1}
+    - _EquatorColor: {r: 0.16470587, g: 0.7489346, b: 1, a: 1}
     - _Ground: {r: 0.4779411, g: 0.43111518, b: 0.23545504, a: 0}
-    - _GroundColor: {r: 0.1254902, g: 0.92549026, b: 0.95294124, a: 1}
+    - _GroundColor: {r: 0.12549017, g: 0.9529412, b: 0.8510036, a: 1}
     - _MoonColor: {r: 1, g: 1, b: 1, a: 1}
     - _Sky: {r: 0.6691177, g: 0.29519898, b: 0.29519898, a: 0}
-    - _SkyColor: {r: 0, g: 0.2949354, b: 0.31132078, a: 1}
+    - _SkyColor: {r: 0.16470589, g: 0.8235294, b: 1, a: 1}
     - _Skycol: {r: 0.27941146, g: 0.64219046, b: 1, a: 0}
     - _SunColor: {r: 0.5514706, g: 0.8515212, b: 1, a: 1}
     - _Tint: {r: 1, g: 1, b: 1, a: 0}
