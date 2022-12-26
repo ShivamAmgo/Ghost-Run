@@ -11,8 +11,11 @@ Material:
   m_Shader: {fileID: 4800000, guid: 6fc9318f5193c094c98c0d450cd61e3b, type: 3}
   m_ValidKeywords:
   - _BACKGROUNDMODE_COLORS
+  - _ENABLECLOUDSROTATION_ON
+  - _ENABLECLOUDS_ON
   - _ENABLEPATTERNOVERLAY_ON
   - _ENABLESTARSTWINKLING_ON
+  - _ENABLESTARS_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -180,10 +183,10 @@ Material:
     - _CloudHeight: -0.185
     - _Clouds: 1
     - _CloudsCat: 1
-    - _CloudsHeight: -0.041
+    - _CloudsHeight: -0.226
     - _CloudsLitbySun: 0
     - _CloudsRotation: 30
-    - _CloudsRotationSpeed: 1
+    - _CloudsRotationSpeed: 2
     - _ColorsCat: 1
     - _Contrast: 2
     - _Contrsat: 1
@@ -195,14 +198,14 @@ Material:
     - _DstBlend: 0
     - _Enable1Twinkling: 0
     - _EnableBuiltinFog: 0
-    - _EnableClouds: 0
-    - _EnableCloudsRotation: 0
+    - _EnableClouds: 1
+    - _EnableCloudsRotation: 1
     - _EnableDirectionLight: 0
     - _EnableMoon: 0
     - _EnablePattern: 1
     - _EnablePatternOverlay: 1
     - _EnableSkyPatternOverlay: 1
-    - _EnableStars: 0
+    - _EnableStars: 1
     - _EnableStarsHeightMask: 0
     - _EnableStarsRotation: 0
     - _EnableStarsSunMask: 1
@@ -265,7 +268,7 @@ Material:
     - _StarsMaskPower: 1
     - _StarsRotation: 360
     - _StarsRotationSpeed: 0.5
-    - _StarsSize: 0.319
+    - _StarsSize: 0.434
     - _StarsSunMask: 0.01
     - _SunCat: 1
     - _SunIntensity: 2
@@ -296,7 +299,7 @@ Material:
     m_Colors:
     - _CloudLightColor: {r: 0.5620674, g: 0.6149295, b: 0.6764706, a: 1}
     - _CloudShadowColor: {r: 0.03952206, g: 0.12203295, b: 0.31617644, a: 1}
-    - _CloudsLightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _CloudsLightColor: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}
     - _CloudsShadowColor: {r: 0.8584906, g: 0.85704434, b: 0.7977483, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color0: {r: 0, g: 0.5054344, b: 1, a: 0}

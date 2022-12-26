@@ -57,7 +57,10 @@ private void FixedUpdate()
   }
   private void Caught(Transform victim)
   {
-    
+    if (!victim==transform)
+    {
+        return;
+    }
       RagdollActive(true);
       DisableColliders(true);
       Speed = 0;

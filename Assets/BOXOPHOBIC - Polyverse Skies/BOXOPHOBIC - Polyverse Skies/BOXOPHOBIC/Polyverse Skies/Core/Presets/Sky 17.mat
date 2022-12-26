@@ -12,10 +12,12 @@ Material:
   m_ValidKeywords:
   - _BACKGROUNDMODE_COLORS
   - _ENABLECLOUDSROTATION_ON
+  - _ENABLECLOUDS_ON
   - _ENABLESTARSTWINKLING_ON
+  - _ENABLESTARS_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 0
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -180,7 +182,7 @@ Material:
     - _CloudHeight: -0.185
     - _Clouds: 1
     - _CloudsCat: 1
-    - _CloudsHeight: -0.041
+    - _CloudsHeight: -0.267
     - _CloudsLitbySun: 0
     - _CloudsRotation: 30
     - _CloudsRotationSpeed: 1
@@ -195,14 +197,14 @@ Material:
     - _DstBlend: 0
     - _Enable1Twinkling: 0
     - _EnableBuiltinFog: 0
-    - _EnableClouds: 0
+    - _EnableClouds: 1
     - _EnableCloudsRotation: 1
     - _EnableDirectionLight: 0
     - _EnableMoon: 0
     - _EnablePattern: 1
     - _EnablePatternOverlay: 0
     - _EnableSkyPatternOverlay: 1
-    - _EnableStars: 0
+    - _EnableStars: 1
     - _EnableStarsHeightMask: 0
     - _EnableStarsRotation: 0
     - _EnableStarsSunMask: 1
@@ -265,8 +267,8 @@ Material:
     - _StarsMaskPower: 1
     - _StarsRotation: 360
     - _StarsRotationSpeed: 0.5
-    - _StarsSize: 0.319
-    - _StarsSunMask: 0.01
+    - _StarsSize: 0.457
+    - _StarsSunMask: 0.276
     - _SunCat: 1
     - _SunIntensity: 2
     - _SunRadiusB: 0
