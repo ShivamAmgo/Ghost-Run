@@ -6,7 +6,7 @@ using UnityEngine;
 public class Transformation : MonoBehaviour
 {
     [SerializeField] private List<Ghost> AllGhosts;
-    [SerializeField] private ParticleSystem TransformationFx;
+    [SerializeField] private ParticleSystem[] TransformationFx;
     [SerializeField] private PlayerMovement m_PlayerMovement;
     [SerializeField]float SpeedIncreaseFactor=1;
     [SerializeField] private int ParticleCount = 50;
@@ -25,8 +25,11 @@ public class Transformation : MonoBehaviour
             return;
         }
 
-       
-        TransformationFx.Emit(ParticleCount);
+
+        foreach (var fx in TransformationFx)
+        {
+            fx.Play();
+        }
         AllGhosts[ActiveGhostIndex].gameObject.SetActive(false);
         AllGhosts[++ActiveGhostIndex].gameObject.SetActive(true);
         AllGhosts[ActiveGhostIndex].Transformed();

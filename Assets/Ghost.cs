@@ -16,6 +16,7 @@ public class Ghost : MonoBehaviour
     [SerializeField] private SphereCollider Attacktrigger;
     [SerializeField] private GameObject[] ghost;
     [SerializeField] private SphereCollider[] MirrorDetectors;
+    private bool CrawledOut = false;
 
     public delegate void Chasing();
 
@@ -38,9 +39,9 @@ public class Ghost : MonoBehaviour
 
     private void CrawlOut()
     {
-        
-        m_Animator.enabled = true;
         m_Animator.SetTrigger("CrawlOut");
+        m_Animator.enabled = true;
+        
         ActivateGhost(true);
         DisableDetectors(false);
     }
@@ -75,9 +76,20 @@ public class Ghost : MonoBehaviour
 
     public void EmergeOutFlyingFromWell()
     {
-        transform.DOJump(transform.position + new Vector3(0, 0, 3), 3, 1,3).SetEase(Ease.Linear).OnComplete(() =>
+        Debug.Log("Flying");
+        if (CrawledOut)
         {
-            SetRootMotion(0);
+            return;
+        }
+
+        CrawledOut = true;
+        transform.DOJump(transform.position + new Vector3(0, 0, 7), 3.75f, 0,2.5f).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            DOVirtual.DelayedCall(1, () =>
+            {
+                SetRootMotion(0);
+            });
+            
         });
     }
     public void Transformed()
